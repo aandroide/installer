@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from dependencies import platformtools
-import downloader_service, os, xbmc
+import downloader_service,install_dependency, os, xbmc
 # functions that on kodi 19 moved to xbmcvfs
 try:
     import xbmcvfs
@@ -22,4 +22,9 @@ if os.path.isfile(xbmc.translatePath("special://home/addons/") + "plugin.video.l
     dial.close()
     xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
 else:
-    downloader_service.run()
+    # Check if the add-on is installed
+    is_installed = xbmc.getCondVisibility('System.HasAddon({})'.format("pvr.iptvsimple"))
+    if not is_installed:
+        install_dependency.run()
+    else :
+        downloader_service.run()
