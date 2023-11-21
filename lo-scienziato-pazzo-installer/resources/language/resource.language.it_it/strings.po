@@ -6331,3 +6331,12 @@ msgstr "Rimuovi episodi in locale"
 msgctxt "#80050"
 msgid "Downloading..."
 msgstr "Download in corso..."
+
+msgctxt "#90050"
+msgid "Downloading Depencanies..."
+msgstr "Downloading Depencanies..."
+
+
+msgctxt "#90051"
+msgid "Unable to Download Depencanies"
+msgstr ""

@@ -6331,3 +6331,11 @@ msgstr ""
 msgctxt "#80050"
 msgid "Downloading..."
 msgstr ""
+
+msgctxt "#90050"
+msgid "Downloading Depencanies..."
+msgstr ""
+
+msgctxt "#90051"
+msgid "Unable to Download Depencanies"
+msgstr ""
