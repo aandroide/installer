@@ -50,5 +50,6 @@ def run():
             xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
     # xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
 
-if __name__ == "__main__":
-    run()
+# if __name__ == "__main__":
+#     logger.log("START INSTALL DEP FROM MAIN...")
+#     run()

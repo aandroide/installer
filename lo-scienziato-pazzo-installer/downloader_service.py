@@ -238,5 +238,6 @@ def fOpen(file, mode = 'r'):
     else:
         return open(file, mode)
 
-if __name__ == "__main__":
-    run()
+# if __name__ == "__main__":
+#     logger.log("START download serv FROM MAIN...")
+#     run()
