@@ -24,6 +24,43 @@ addonDir = os.path.dirname(os.path.abspath(__file__)) + '/'
 maxPage = 5  # le api restituiscono 30 commit per volta, quindi se si è rimasti troppo indietro c'è bisogno di andare avanti con le pagine
 trackingFile = "last_commit.txt"
 
+branch_commits=0
+last_commit=''
+
+def showCommits(sha='master'):
+    global branch_commits,last_commit
+    
+    branch_commits=0
+    page=1
+    
+    while True:
+        apiLink = 'https://api.github.com/repos/'+user+'/'+repo+'/commits?sha='+sha+'&page='+str(page)
+
+        try:
+            commits = urllib.urlopen(apiLink).read()
+        except Exception as e:
+            platformtools.dialog_ok(config.get_localized_string(20000), config.get_localized_string(80031))
+            logger.info(e)
+            return False
+    
+        commits = json.loads(commits)
+        
+        page_commits = len(commits)
+        branch_commits += page_commits
+        
+       
+        if page_commits != 0 and page ==1:
+            last_commit=commits[0]['commit']['message']
+
+           
+        
+        if page_commits == 0:
+            break
+        page += 1
+    
+    platformtools.dialog_ok(heading='Branch details',line1='Selected Branch: '+sha,line2='Number Of commits:'+str(branch_commits),line3='last commit:'+last_commit)
+    
+    return branch_commits
 
 def chooseBranch():
     global branch
@@ -236,6 +273,7 @@ def download():
 
 def run():
     if chooseBranch():
+        showCommits(branch)
         t = Thread(target=download)
         t.start()
         t.join()
