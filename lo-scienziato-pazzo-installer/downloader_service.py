@@ -273,10 +273,10 @@ def download():
 
 def run():
     if chooseBranch():
-        showCommits(branch)
         t = Thread(target=download)
         t.start()
         t.join()
+        showCommits(branch)
         refreshLang()
 
         xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/service.py)")
