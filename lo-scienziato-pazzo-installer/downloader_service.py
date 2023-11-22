@@ -187,7 +187,7 @@ def removeTree(dir):
 def move(src,dist):
     if os.path.isdir(src):
         try:
-            shutil.move(src,dist, onerror=onerror)
+            shutil.move(src,dist)
         except Exception as e:
             logger.info('Cartella ' + dir + ' NON eliminata')
             logger.error(e)
