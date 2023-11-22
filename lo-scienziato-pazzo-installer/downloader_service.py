@@ -108,6 +108,14 @@ def updateFromZip(message=config.get_localized_string(80050)):
 
     dp.update(95)
 
+
+    if branch== "master":
+        nextractedDir = filetools.join(extractedDir, "plugin.video.lo-scienziato-pazzo")
+        extractedDir2 = filetools.join(destpathname, "myaddon2-" + branch)
+        move(nextractedDir,extractedDir2)
+        removeTree(extractedDir)
+        extractedDir=extractedDir2
+  
     # puliamo tutto
     global addonDir
     if extractedDir != addonDir:
@@ -175,6 +183,15 @@ def removeTree(dir):
         except Exception as e:
             logger.info('Cartella ' + dir + ' NON eliminata')
             logger.error(e)
+
+def move(src,dist):
+    if os.path.isdir(src):
+        try:
+            shutil.move(src,dist, onerror=onerror)
+        except Exception as e:
+            logger.info('Cartella ' + dir + ' NON eliminata')
+            logger.error(e)
+
 
 
 def rename(dir1, dir2):
