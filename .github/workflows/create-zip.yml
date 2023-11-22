@@ -1,5 +1,7 @@
 name: Create ZIP file
 on: [push]
+permissions:
+  contents: write
 jobs:
   To-Zip:
     runs-on: ubuntu-latest
@@ -9,10 +11,11 @@ jobs:
 
       - name: Create Zip file
         run: zip -r -q repo/lo-scienziato-pazzo-installer.zip lo-scienziato-pazzo-installer
-
+      
       - name: Commit and push
-        uses: EndBug/add-and-commit@v7
-        with:
-          add: '["repo/lo-scienziato-pazzo-installer.zip"]'
-          message: "update zip file action"
-          push: true
+        run: |
+          git config --global user.name 'aandroide'
+          git config --global user.email 'aandroide@users.noreply.github.com'
+          git commit -am "Automated update zip file"
+          git push
+          
