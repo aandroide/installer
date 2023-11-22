@@ -3,19 +3,20 @@ on: [push]
 permissions:
   contents: write
 jobs:
-  To-Zip:
+  zip-and-add:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
 
-      - name: Create Zip file
-        run: zip -r -q repo/lo-scienziato-pazzo-installer.zip lo-scienziato-pazzo-installer
-      
-      - name: Commit and push
-        run: |
-          git config --global user.name 'aandroide'
-          git config --global user.email 'aandroide@users.noreply.github.com'
-          git commit -am "Automated update zip file"
-          git push
-          
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Zip Folder
+      run: zip -r repo/lo-scienziato-pazzo-installer.zip lo-scienziato-pazzo-installer
+
+    - name: Add Zip to Repository
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add repo/lo-scienziato-pazzo-installer.zip
+        git commit -m "Automated update zip file"
+        git push
