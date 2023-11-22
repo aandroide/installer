@@ -17,6 +17,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add my_folder.zip
+        git add repo/lo-scienziato-pazzo-installer.zip
         git commit -m "Automated update zip file"
         git push
