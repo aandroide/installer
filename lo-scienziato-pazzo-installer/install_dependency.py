@@ -29,9 +29,23 @@ def run():
         dp = platformtools.dialog_progress_bg(config.get_localized_string(20000),config.get_localized_string(90050) )
         dp.update(0)
 
-        result =subprocess.run(["sudo","apt-get","install","kodi-pvr-iptvsimple","-y"])
+        sudo_password=platformtools.dialog_input("", "Enter sudo password:")
+        if sudo_password==None:
+            platformtools.dialog_ok(config.get_localized_string(20000), "must enter password to install dependencies")
+            dp.close()
+            return
+        
+        proc= subprocess.Popen(["sudo","apt-get","install","kodi-pvr-iptvsimple","-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+        output,error= proc.communicate(input=sudo_password+"\n")
+        
+        if error != "":
+            platformtools.dialog_ok(config.get_localized_string(20000), "error happen in install (internet connection error or wrong password)")
+            dp.close()
+            return
+        
+
         dp.update(95)
-        if result.returncode==0:
+        if proc.returncode==0:
             logger.info("installed depenceny success")
             xbmc.sleep(5000)
             xbmc.executebuiltin("UpdateLocalAddons")
