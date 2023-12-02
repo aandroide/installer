@@ -1,0 +1,163 @@
+# -*- coding: utf-8 -*-
+import io
+import platform
+import xbmc, os, shutil, json
+import subprocess
+# functions that on kodi 19 moved to xbmcvfs
+try:
+    import xbmcvfs
+    xbmc.translatePath = xbmcvfs.translatePath
+    xbmc.validatePath = xbmcvfs.validatePath
+    xbmc.makeLegalFilename = xbmcvfs.makeLegalFilename
+except:
+    pass
+from dependencies import platformtools, logger, filetools
+from dependencies import config
+from threading import Thread
+try:
+    import urllib.request as urllib
+except ImportError:
+    import urllib
+
+
+def install_depenecy(pkg_name,dist="ubuntu"):
+    if dist == "arch":
+        pkg = subprocess.run(["sudo","yaourt","install",pkg_name,"-y"])
+    else:
+        pkg = subprocess.run(["sudo","apt-get","install",pkg_name,"-y"])
+    return pkg        
+
+def install_depenency_with_sudo(pkg_name,sudo_password,dist="ubuntu"):
+    if dist == "arch":
+        proc= subprocess.Popen(["sudo","yaourt","-S","install",pkg_name,"-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+    else:
+        proc= subprocess.Popen(["sudo","apt-get","-S","install",pkg_name,"-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+    
+    output,error=proc.communicate(input=sudo_password+"\n")
+    return proc
+          
+
+def check_sudo_password():      
+    try:
+        result = subprocess.check_output('sudo -n true 1',shell=True)
+        return 0
+    except:
+        return 1
+
+def ask_for_password():
+    sudo_password=platformtools.dialog_input("", "Enter sudo password:")
+    if sudo_password==None:
+        platformtools.dialog_ok(config.get_localized_string(20000), "must enter password to install dependencies")
+    
+    return sudo_password
+
+
+def linux_distro():
+    try:
+        import distro
+        return distro.id()
+    except:
+        return "N/A"
+
+
+def success_installation(dp):
+    logger.info("installed depenceny success")
+    xbmc.executebuiltin("UpdateLocalAddons")
+    xbmc.sleep(1000)
+    if dp:
+        dp.update(100)
+        dp.close()
+    platformtools.dialog_ok("Install dependencies","Dependencies installed succussfully")
+    #xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
+    xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")    
+        
+def failed_installation(dp):
+    logger.info("Error in installing")
+    dp.close()
+    platformtools.dialog_ok(config.get_localized_string(20000), config.get_localized_string(90051))
+
+
+def install_dep_in_linux():
+    # confirmation dialog 
+    accept= platformtools.dialog_yesno("Install dependenies","addons need to install iptv client addons, install it?")
+    if not accept:
+        return
+    dp = platformtools.dialog_progress_bg(config.get_localized_string(20000),config.get_localized_string(90050) )
+    dp.update(0)
+    
+    #Check sudo password 
+    sudo_password=""
+    password_needed=check_sudo_password()
+    dp.update(10)
+    xbmc.sleep(1000)
+
+    #if password needes ask
+    if password_needed:
+        sudo_password=ask_for_password()
+        if sudo_password==None:
+            dp.close()
+            return    
+
+    
+    # installation
+    try:
+        success=0    
+        # if arch    
+        if linux_distro()=="arch":
+            proc= subprocess.Popen(["sudo","-S","yaourt","install","kodi-addon-pvr-iptvsimple","-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+            output,error= proc.communicate(input=sudo_password+"\n")
+            if proc.returncode==0: success=1
+                
+        # if it's rasperry-pi 
+        elif "arm" in platform.machine().lower():
+            pkg1 = install_depenecy("kodi-inputstream-adaptive")
+            dp.update(25)
+            pkg2 = install_depenecy("kodi-inputstream-ffmpegdirect")
+            dp.update(50)
+            pkg3 = install_depenecy("kodi-inputstream-rtmp")
+            dp.update(75)
+            pkg4 = install_depenecy("kodi-pvr-iptvsimple")
+
+            if pkg1.returncode==0 and pkg2.returncode==0 and pkg3.returncode==0 and pkg4.returncode==0:
+                success=1
+        #if it's ubuntu
+        else:
+            proc= subprocess.Popen(["sudo","-S","apt-get","install","kodi-pvr-iptvsimple","-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+            output,error= proc.communicate(input=sudo_password+"\n")
+            if proc.returncode==0: success=1
+
+        ################################
+        # check installation
+        ###############################
+        dp.update(95)
+        if success==1:success_installation(dp)
+        else : failed_installation(dp)   
+        
+        dp.close()               
+    except Exception as ex:
+        logger.info("Error in installing")
+        platformtools.dialog_ok(config.get_localized_string(20000), config.get_localized_string(90051))
+        dp.close()
+
+def run():
+    # --- if linux ---
+    if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
+        install_dep_in_linux()    
+    else:#--- if not linux --- 
+        xbmc.executebuiltin("InstallAddon({})".format("pvr.iptvsimple"))
+        xbmc.sleep(10000)
+        xbmc.executebuiltin("UpdateLocalAddons")
+        
+        tries=0
+        while tries<30000 and not xbmc.getCondVisibility('System.HasAddon({})'.format("pvr.iptvsimple")):
+            xbmc.sleep(500)
+            tries= tries+500
+        
+        if xbmc.getCondVisibility('System.HasAddon({})'.format("pvr.iptvsimple")):
+            xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
+        #     xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
+    # xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
+
+# if __name__ == "__main__":
+#     logger.log("START INSTALL DEP FROM MAIN...")
+#     run()

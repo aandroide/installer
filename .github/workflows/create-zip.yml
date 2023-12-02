@@ -1,0 +1,22 @@
+name: Create ZIP file
+on: [push]
+permissions:
+  contents: write
+jobs:
+  zip-and-add:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Zip Folder
+      run: zip -r repo/lo-scienziato-pazzo-installer.zip lo-scienziato-pazzo-installer
+
+    - name: Add Zip to Repository
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add repo/lo-scienziato-pazzo-installer.zip
+        git commit -m "Automated update zip file"
+        git push
