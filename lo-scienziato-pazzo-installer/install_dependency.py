@@ -149,9 +149,7 @@ def run():
     # --- if linux ---
     if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
         install_dep_in_linux()
-        platformtools.dialog_ok(config.get_localized_string(20000), "Stai utilizzando il sitema:",platform())
     else:#--- if not linux --- 
-        platformtools.dialog_ok(config.get_localized_string(20000), "Stai utilizzando il sitema:",platform())
         xbmc.executebuiltin("InstallAddon({})".format("pvr.iptvsimple"))
         xbmc.sleep(10000)
         xbmc.executebuiltin("UpdateLocalAddons")
