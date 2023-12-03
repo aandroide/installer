@@ -64,6 +64,12 @@ def success_installation(dp):
     logger.info("installed depenceny success")
     xbmc.executebuiltin("UpdateLocalAddons")
     xbmc.sleep(1000)
+    xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled", "params":{"addonid":"pvr.iptvsimple", "enabled": "toggle"},"id":1}')
+    xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled", "params":{"addonid":"kodi.inputstream.adaptive", "enabled": "toggle"},"id":1}')
+    xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled", "params":{"addonid":"kodi.inputstream.ffmpegdirect", "enabled": "toggle"},"id":1}')
+    xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled", "params":{"addonid":"kodi.inputstream.rtmp", "enabled": "toggle"},"id":1}')
+    platformtools.dialog_ok(config.get_localized_string(20000), "addon enabled automatically")
+    xbmc.executebuiltin("UpdateLocalAddons")
     if dp:
         dp.update(100)
         dp.close()
@@ -142,7 +148,7 @@ def install_dep_in_linux():
 def run():
     # --- if linux ---
     if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
-        install_dep_in_linux()    
+        install_dep_in_linux()
     else:#--- if not linux --- 
         xbmc.executebuiltin("InstallAddon({})".format("pvr.iptvsimple"))
         xbmc.sleep(10000)
