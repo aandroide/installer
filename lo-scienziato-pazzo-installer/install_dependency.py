@@ -56,7 +56,6 @@ def linux_distro():
     try:
         import distro
         return distro.id()
-        platformtools.dialog_ok(config.get_localized_string(20000), "Stai utilizzando il sitema:",distro.id())
     except:
         return "N/A"
 
@@ -149,8 +148,10 @@ def install_dep_in_linux():
 def run():
     # --- if linux ---
     if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
-        install_dep_in_linux()    
+        install_dep_in_linux()
+        platformtools.dialog_ok(config.get_localized_string(20000), "Stai utilizzando il sitema:",distro.id())
     else:#--- if not linux --- 
+        platformtools.dialog_ok(config.get_localized_string(20000), "Stai utilizzando il sitema:",distro.id())
         xbmc.executebuiltin("InstallAddon({})".format("pvr.iptvsimple"))
         xbmc.sleep(10000)
         xbmc.executebuiltin("UpdateLocalAddons")
