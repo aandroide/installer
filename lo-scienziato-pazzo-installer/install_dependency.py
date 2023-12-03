@@ -56,6 +56,7 @@ def linux_distro():
     try:
         import distro
         return distro.id()
+        platformtools.dialog_ok(config.get_localized_string(20000), "Stai utilizzando il sitema:",distro.id())
     except:
         return "N/A"
 
