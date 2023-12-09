@@ -6333,9 +6333,9 @@ msgid "Downloading..."
 msgstr ""
 
 msgctxt "#90050"
-msgid "Downloading Depencanies..."
+msgid "Downloading Dependencies..."
 msgstr ""
 
 msgctxt "#90051"
-msgid "Unable to Download Depencanies"
+msgid "Unable to Download Dependencies"
 msgstr ""
