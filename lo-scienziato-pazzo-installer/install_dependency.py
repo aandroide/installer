@@ -75,7 +75,7 @@ def success_installation(dp):
         dp.close()
     platformtools.dialog_ok("Install dependencies","Dependencies installed succussfully")
     #xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
-    #xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")    
+    xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")    
         
 def failed_installation(dp):
     logger.info("Error in installing")
@@ -129,7 +129,7 @@ def install_dep_in_linux():
                 success=1
         #if it's ubuntu
         else:
-            proc= subprocess.Popen(["sudo","-S","apt-get","install","kodi-pvr-iptvsimple","-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
+            proc= subprocess.Popen(["sudo","-S","apt-get","install","kodi-pvr-iptvsimple","-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,encoding="utf-8")
             output,error= proc.communicate(input=sudo_password+"\n")
             if proc.returncode==0: success=1
 
@@ -161,8 +161,8 @@ def run():
             tries= tries+500
         
         if xbmc.getCondVisibility('System.HasAddon({})'.format("pvr.iptvsimple")):
-            print("ok")
-            #xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
+            
+            xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
         #     xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
     # xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
 
