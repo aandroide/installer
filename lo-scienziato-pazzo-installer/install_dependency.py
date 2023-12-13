@@ -141,6 +141,7 @@ def install_dep_in_linux():
         
         dp.close()               
     except Exception as ex:
+        logger.exception("Error in installing")
         logger.info("Error in installing")
         platformtools.dialog_ok(config.get_localized_string(20000), config.get_localized_string(90051))
         dp.close()
