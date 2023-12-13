@@ -75,7 +75,7 @@ def success_installation(dp):
         dp.close()
     platformtools.dialog_ok("Install dependencies","Dependencies installed succussfully")
     #xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
-    xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")    
+    #xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")    
         
 def failed_installation(dp):
     logger.info("Error in installing")
@@ -160,7 +160,7 @@ def run():
             tries= tries+500
         
         if xbmc.getCondVisibility('System.HasAddon({})'.format("pvr.iptvsimple")):
-            xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
+            #xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
         #     xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
     # xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
 
