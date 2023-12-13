@@ -94,6 +94,7 @@ def install_dep_in_linux():
     #Check sudo password 
     sudo_password=""
     password_needed=check_sudo_password()
+    logger.info("the password is:", password_needed)
     dp.update(10)
     xbmc.sleep(1000)
 
