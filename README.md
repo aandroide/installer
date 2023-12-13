@@ -1,4 +1,6 @@
 # installer
+https://www.paypal.com/donate/?hosted_button_id=HQ6KGF3PVSAPG
+
 repo installer
 
 <b>lo-scienziato-pazzo-Installer</b><br>
