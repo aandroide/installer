@@ -6340,3 +6340,7 @@ msgstr "Download delle dipendenze..."
 msgctxt "#90051"
 msgid "Unable to Download Dependancies"
 msgstr "ERRORE: Impossibile scaricare le dipendenze controlla il log"
+
+msgctxt "#90052"
+msdid "Dependencies installed succussfully"
+msgstr "Le dipendenze sono state installate correttamente"
