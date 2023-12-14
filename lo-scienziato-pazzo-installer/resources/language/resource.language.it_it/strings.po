@@ -6333,10 +6333,10 @@ msgid "Downloading..."
 msgstr "Download in corso..."
 
 msgctxt "#90050"
-msgid "Downloading Depencanies..."
-msgstr "Downloading Depencanies..."
+msgid "Downloading Dependancies..."
+msgstr "Download delle dipendenze..."
 
 
 msgctxt "#90051"
-msgid "Unable to Download Depencanies"
-msgstr ""
+msgid "Unable to Download Dependancies"
+msgstr "Impossibile scaricare le dipendenze"
