@@ -58,8 +58,37 @@ def linux_distro():
         return distro.id()
     except:
         return "N/A"
+        
+def get_platform():
 
-
+    if xbmc.getCondVisibility('system.platform.osx'):
+        return "OSX"
+    elif xbmc.getCondVisibility('System.HasAddon(service.coreelec.settings)'):
+        return "CoreElec"
+    elif xbmc.getCondVisibility('System.HasAddon(service.libreelec.settings)'):
+        return "LibreElec"
+    elif xbmc.getCondVisibility('System.HasAddon(service.osmc.settings)'):
+        return "OSMC"
+    elif xbmc.getCondVisibility('system.platform.atv2'):
+        return "ATV2"
+    elif xbmc.getCondVisibility('system.platform.ios'):
+        return "iOS"
+    elif xbmc.getCondVisibility('system.platform.windows'):
+        return platform.platform(terse=True)
+    elif xbmc.getCondVisibility('system.platform.android'):
+        return "Android"
+    elif os.path.exists('/usr/share/plasma/desktoptheme/kubuntu'):
+        if "Ubuntu" in os.uname()[3]:
+          return "Kubuntu"
+    elif xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
+        print("Detected OS: Linux")
+        if "arm" in os.uname()[4]:
+          return "Raspberry"
+        elif "Ubuntu" in os.uname()[3]:
+          return "Ubuntu"
+    else:
+        return "Unknown"
+        
 def success_installation(dp):
     logger.info("installed dependencies success")
     xbmc.executebuiltin("UpdateLocalAddons")
@@ -69,12 +98,11 @@ def success_installation(dp):
     xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled", "params":{"addonid":"kodi.inputstream.ffmpegdirect", "enabled": "toggle"},"id":1}')
     xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled", "params":{"addonid":"kodi.inputstream.rtmp", "enabled": "toggle"},"id":1}')
     platformtools.dialog_ok(config.get_localized_string(20000), "addon enabled automatically")
-    xbmc.executebuiltin("UpdateLocalAddons")
-    if dp:
-        dp.update(100)
-        dp.close()
+    dp.update(100)
+    dp.close() 
     platformtools.dialog_ok("Install dependencies","Dependencies installed succussfully")
-    #xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
+    xbmc.sleep(1000)
+    xbmc.executebuiltin("UpdateLocalAddons")
     xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")    
         
 def failed_installation(dp):
@@ -82,6 +110,18 @@ def failed_installation(dp):
     dp.close()
     platformtools.dialog_ok(config.get_localized_string(20000), config.get_localized_string(90051))
 
+def install_libre():
+    if get_platform()=="LibreElec": 
+        xbmc.executebuiltin("InstallAddon({})".format("pvr.iptvsimple"))    
+        xbmc.sleep(10000)
+        xbmc.executebuiltin("UpdateLocalAddons")
+        tries=0
+        while tries<30000 and not xbmc.getCondVisibility('System.HasAddon({})'.format("pvr.iptvsimple")):
+            xbmc.sleep(500)
+            tries= tries+500
+        
+        if xbmc.getCondVisibility('System.HasAddon({})'.format("pvr.iptvsimple")):
+            xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
 
 def install_dep_in_linux():
     # confirmation dialog 
@@ -94,7 +134,6 @@ def install_dep_in_linux():
     #Check sudo password 
     sudo_password=""
     password_needed=check_sudo_password()
-    logger.info("the password is:", password_needed)
     dp.update(10)
     xbmc.sleep(1000)
 
@@ -108,7 +147,7 @@ def install_dep_in_linux():
     
     # installation
     try:
-        success=0    
+        success=0 
         # if arch    
         if linux_distro()=="arch":
             proc= subprocess.Popen(["sudo","-S","yaourt","install","kodi-addon-pvr-iptvsimple","-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
@@ -132,6 +171,8 @@ def install_dep_in_linux():
             proc= subprocess.Popen(["sudo","-S","apt-get","install","kodi-pvr-iptvsimple","-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,encoding="utf-8")
             output,error= proc.communicate(input=sudo_password+"\n")
             if proc.returncode==0: success=1
+            
+            
 
         ################################
         # check installation
@@ -142,14 +183,28 @@ def install_dep_in_linux():
         
         dp.close()               
     except Exception as ex:
-        logger.info("Error in installing:",ex)
+        logger.info("Error in installing",ex)
         platformtools.dialog_ok(config.get_localized_string(20000), config.get_localized_string(90051))
         dp.close()
 
 def run():
+
+    # new function platform 
+    logger.info("Stai utilizzando:", get_platform())
+    
+    platformtools.dialog_ok("Stai utilizzando:", get_platform())
+
+    if get_platform()=="LibreElec":
+        install_libre()
+
     # --- if linux ---
-    if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
+    #if xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
+    elif get_platform()=="Ubuntu":
         install_dep_in_linux()
+        
+    elif get_platform()=="Kubuntu":
+        install_dep_in_linux()
+        
     else:#--- if not linux --- 
         xbmc.executebuiltin("InstallAddon({})".format("pvr.iptvsimple"))
         xbmc.sleep(10000)
@@ -161,7 +216,6 @@ def run():
             tries= tries+500
         
         if xbmc.getCondVisibility('System.HasAddon({})'.format("pvr.iptvsimple")):
-            
             xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
         #     xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
     # xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
