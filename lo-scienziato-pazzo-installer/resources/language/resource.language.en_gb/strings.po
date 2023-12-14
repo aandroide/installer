@@ -6339,3 +6339,7 @@ msgstr ""
 msgctxt "#90051"
 msgid "Unable to Download Dependencies"
 msgstr ""
+
+msgctxt "#90052
+msgid "Dependencies installed succussfully"
+msgcstr ""
