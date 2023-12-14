@@ -29,9 +29,9 @@ def install_depenecy(pkg_name,dist="ubuntu"):
 
 def install_depenency_with_sudo(pkg_name,sudo_password,dist="ubuntu"):
     if dist == "arch":
-        proc= subprocess.Popen(["sudo","yaourt","-S","install",pkg_name,"-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,text=True)
+        proc= subprocess.Popen(["sudo","yaourt","-S","install",pkg_name,"-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     else:
-        proc= subprocess.Popen(["sudo","apt-get","-S","install",pkg_name,"-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,text=True)
+        proc= subprocess.Popen(["sudo","apt-get","-S","install",pkg_name,"-y"],stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True)
     
     output,error=proc.communicate(input=sudo_password+"\n")
     return proc
