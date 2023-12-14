@@ -6342,4 +6342,4 @@ msgstr ""
 
 msgctxt "#90052
 msgid "Dependencies installed succussfully"
-msgcstr ""
+msgstr ""
