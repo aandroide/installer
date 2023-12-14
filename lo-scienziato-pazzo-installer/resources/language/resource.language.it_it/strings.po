@@ -6339,4 +6339,4 @@ msgstr "Download delle dipendenze..."
 
 msgctxt "#90051"
 msgid "Unable to Download Dependancies"
-msgstr "Impossibile scaricare le dipendenze"
+msgstr "ERRORE: Impossibile scaricare le dipendenze controlla il log"
