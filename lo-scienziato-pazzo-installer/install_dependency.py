@@ -100,7 +100,7 @@ def success_installation(dp):
     platformtools.dialog_ok(config.get_localized_string(20000), "addon enabled automatically")
     dp.update(100)
     dp.close() 
-    platformtools.dialog_ok("Install dependencies","Dependencies installed succussfully")
+    platformtools.dialog_ok(config.get_localized_string(20000),"Dependencies installed succussfully")
     xbmc.sleep(1000)
     xbmc.executebuiltin("UpdateLocalAddons")
     xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")    
