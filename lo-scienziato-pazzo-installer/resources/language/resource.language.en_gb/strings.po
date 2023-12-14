@@ -6261,7 +6261,7 @@ msgid "Installing..."
 msgstr ""
 
 msgctxt "#80033"
-msgid "Choose the version of Lo Scienziato pazzo to install"
+msgid "Choose the version of Lo Scienziato Pazzo to install"
 msgstr ""
 
 msgctxt "#80034"
