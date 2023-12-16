@@ -6344,3 +6344,7 @@ msgstr "ERRORE: Impossibile scaricare le dipendenze controlla il log"
 msgctxt "#90052"
 msdid "Dependencies installed succussfully"
 msgstr "Le dipendenze sono state installate correttamente"
+
+msgctxt "#90053
+msgid "Enter your sudo password to install dependencies automatically"
+msgstr "Inserisci la tua sudo password per installare le dipendenze automaticamente"
