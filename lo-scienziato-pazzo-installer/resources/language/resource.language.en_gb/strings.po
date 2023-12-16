@@ -6360,6 +6360,11 @@ msgctxt "#90056"
 msgid "Addons need to install iptv client addons, install it?"
 msgstr ""
 
+msgctxt "#90057"
+msgid "Addon enabled automatically"
+msgstr ""
+
+
 
 
 
