@@ -6345,12 +6345,17 @@ msgctxt "#90052"
 msdid "Dependencies installed succussfully"
 msgstr "Le dipendenze sono state installate correttamente"
 
-msgctxt "#90053
+msgctxt "#90053"
 msgid "Enter your sudo password to install dependencies automatically"
 msgstr "Inserisci la tua sudo password per installare le dipendenze automaticamente"
 
-msgctxt "#90054
+msgctxt "#90054"
 msgid "Must enter password to install dependencies"
 msgstr "E'necessario inserire la password per installare le dipendenze"
+
+msgctxt "#90055"
+msgid "Install dependencies"
+msgstr "Installazione delle dipendenze"
+
 
 
