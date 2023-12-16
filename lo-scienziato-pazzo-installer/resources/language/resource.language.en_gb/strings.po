@@ -6343,3 +6343,8 @@ msgstr ""
 msgctxt "#90052
 msgid "Dependencies installed succussfully"
 msgstr ""
+
+msgctxt "#90053
+msgid "Enter your sudo password to install dependencies automatically"
+msgstr ""
+
