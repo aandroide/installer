@@ -125,7 +125,7 @@ def install_libre():
 
 def install_dep_in_linux():
     # confirmation dialog 
-    accept= platformtools.dialog_yesno("Install dependencies","addons need to install iptv client addons, install it?")
+    accept= platformtools.dialog_yesno(config.get_localized_string(90005),"addons need to install iptv client addons, install it?")
     if not accept:
         return
     dp = platformtools.dialog_progress_bg(config.get_localized_string(20000),config.get_localized_string(90050) )
