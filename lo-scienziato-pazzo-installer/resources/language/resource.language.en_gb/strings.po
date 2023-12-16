@@ -6340,16 +6340,22 @@ msgctxt "#90051"
 msgid "Unable to Download Dependencies"
 msgstr ""
 
-msgctxt "#90052
+msgctxt "#90052"
 msgid "Dependencies installed succussfully"
 msgstr ""
 
-msgctxt "#90053
+msgctxt "#90053"
 msgid "Enter your sudo password to install dependencies automatically"
 msgstr ""
 
-msgctxt "#90054
+msgctxt "#90054"
 msgid "Must enter password to install dependencies"
 msgstr ""
+
+msgctxt "#90055"
+msgid "Install dependencies"
+msgstr ""
+
+
 
 
