@@ -6364,8 +6364,6 @@ msgctxt "#90057"
 msgid "Addon enabled automatically"
 msgstr ""
 
-
-
-
-
-
+msgctxt "#90058"
+msgid "Your operating system is:"
+msgstr ""
