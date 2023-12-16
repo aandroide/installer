@@ -45,9 +45,9 @@ def check_sudo_password():
         return 1
 
 def ask_for_password():
-    sudo_password=platformtools.dialog_input("", "Enter sudo password:")
+    sudo_password=platformtools.dialog_input(config.get_localized_string(20000), config.get_localized_string(90053))
     if sudo_password==None:
-        platformtools.dialog_ok(config.get_localized_string(20000), "must enter password to install dependencies")
+        platformtools.dialog_ok(config.get_localized_string(20000), config.get_localized_string(90054))
     
     return sudo_password
 
