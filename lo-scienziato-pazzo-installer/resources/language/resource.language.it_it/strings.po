@@ -6357,5 +6357,10 @@ msgctxt "#90055"
 msgid "Install dependencies"
 msgstr "Installazione delle dipendenze"
 
+msgctxt "#90056"
+msgid "Addons need to install iptv client addons, install it?"
+msgstr "E' richiesta l'installazione di Iptv client addons, vuoi installarlo?"
+
+
 
 
