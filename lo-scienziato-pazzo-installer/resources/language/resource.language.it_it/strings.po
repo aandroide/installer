@@ -1,4 +1,4 @@
-# Kodi Media Center language file
+# Lo Scienziato Pazzo language file
 # strings 30000 thru 30999 reserved for plugins and plugin settings
 #
 msgid ""
