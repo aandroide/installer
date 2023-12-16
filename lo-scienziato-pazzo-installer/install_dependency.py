@@ -97,7 +97,7 @@ def success_installation(dp):
     xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled", "params":{"addonid":"kodi.inputstream.adaptive", "enabled": "toggle"},"id":1}')
     xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled", "params":{"addonid":"kodi.inputstream.ffmpegdirect", "enabled": "toggle"},"id":1}')
     xbmc.executeJSONRPC('{"jsonrpc":"2.0","method":"Addons.SetAddonEnabled", "params":{"addonid":"kodi.inputstream.rtmp", "enabled": "toggle"},"id":1}')
-    platformtools.dialog_ok(config.get_localized_string(20000), "addon enabled automatically")
+    platformtools.dialog_ok(config.get_localized_string(20000), config.get_localized_string(90057))
     dp.update(100)
     dp.close() 
     platformtools.dialog_ok(config.get_localized_string(20000), config.get_localized_string(90052))
@@ -128,7 +128,7 @@ def install_dep_in_linux():
     accept= platformtools.dialog_yesno(config.get_localized_string(90055),config.get_localized_string(90056))
     if not accept:
         return
-    dp = platformtools.dialog_progress_bg(config.get_localized_string(20000),config.get_localized_string(90050) )
+    dp = platformtools.dialog_progress_bg(config.get_localized_string(20000),config.get_localized_string(90050))
     dp.update(0)
     
     #Check sudo password 
@@ -192,7 +192,7 @@ def run():
     # new function platform 
     logger.info("Stai utilizzando:", get_platform())
     
-    platformtools.dialog_ok("Stai utilizzando:", get_platform())
+    platformtools.dialog_ok(config.get_localized_string(90058), get_platform())
 
     if get_platform()=="LibreElec":
         install_libre()
@@ -217,9 +217,7 @@ def run():
         
         if xbmc.getCondVisibility('System.HasAddon({})'.format("pvr.iptvsimple")):
             xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
-        #     xbmc.executebuiltin("RunAddon(plugin.video.lo-scienziato-pazzo)")
-    # xbmc.executebuiltin("RunScript(special://home/addons/plugin.video.lo-scienziato-pazzo/default.py)")
-
+        
 # if __name__ == "__main__":
 #     logger.log("START INSTALL DEP FROM MAIN...")
 #     run()
