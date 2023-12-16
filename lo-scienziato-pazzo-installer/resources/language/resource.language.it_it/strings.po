@@ -6342,7 +6342,7 @@ msgid "Unable to Download Dependancies"
 msgstr "ERRORE: Impossibile scaricare le dipendenze controlla il log"
 
 msgctxt "#90052"
-msdid "Dependencies installed succussfully"
+msgid "Dependencies installed succussfully"
 msgstr "Le dipendenze sono state installate correttamente"
 
 msgctxt "#90053"
