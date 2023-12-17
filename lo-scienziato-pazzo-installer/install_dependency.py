@@ -83,8 +83,8 @@ def get_platform():
     elif xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
         print("Detected OS: Linux")
         with open ('/sys/firmware/devicetree/base/model','r') as model:
-            if 'Raspberry pi' in model.read().lower():
-            return "Raspberry pi"
+            if 'raspberry pi' in model.read().lower():
+              return "Raspberry pi"
         if "Ubuntu" in os.uname()[3]:
           return "Ubuntu"
     else:
