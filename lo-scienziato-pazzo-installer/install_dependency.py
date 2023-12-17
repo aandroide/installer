@@ -88,8 +88,7 @@ def get_platform():
             try:
                 with open ('/sys/firmware/devicetree/base/model','r') as model:
                     if 'raspberry pi' in model.read().lower():
-                except Exception: pass
-                return "Raspberry pi"
+            return "Raspberry pi"
     else:
         return "Unknown"
         
