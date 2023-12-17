@@ -85,7 +85,7 @@ def get_platform():
         with open ('sys/firmware/devicetree/base/model') as model:
           RPi_model=model.read()
           return "RPi_model"
-        elif "Ubuntu" in os.uname()[3]:
+        if "Ubuntu" in os.uname()[3]:
           return "Ubuntu"
     else:
         return "Unknown"
