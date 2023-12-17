@@ -82,7 +82,7 @@ def get_platform():
           return "Kubuntu"
     elif xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
         print("Detected OS: Linux")
-        with open ('sys/firmware/devicetree/base/model') as model:
+        with open ('/sys/firmware/devicetree/base/model') as model:
           RPi_model=model.read()
           return "RPi_model"
         if "Ubuntu" in os.uname()[3]:
