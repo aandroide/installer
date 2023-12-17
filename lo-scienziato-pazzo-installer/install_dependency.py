@@ -82,8 +82,9 @@ def get_platform():
           return "Kubuntu"
     elif xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
         print("Detected OS: Linux")
-        if "arm" in os.uname()[4]:
-          return "Raspberry"
+        with open ('sys/firmware/devicetree/base/model') as model:
+          RPi_model=model.read()
+          return "RPi_model"
         elif "Ubuntu" in os.uname()[3]:
           return "Ubuntu"
     else:
@@ -203,6 +204,9 @@ def run():
         install_dep_in_linux()
         
     elif get_platform()=="Kubuntu":
+        install_dep_in_linux()
+
+    elif get_platform()=="Raspberry":
         install_dep_in_linux()
         
     else:#--- if not linux --- 
