@@ -84,11 +84,13 @@ def get_platform():
         print("Detected OS: Linux")
         if "Ubuntu" in os.uname()[3]:
           return "Ubuntu"
-        #elif "arm" in platform.machine().lower():
-        #    try:
-        #        with open ('/sys/firmware/devicetree/base/model','r') as model:
-        #            if 'raspberry pi' in model.read().lower():
-        #              return "Raspberry pi"
+        elif "arm" in platform.machine().lower():
+            try:
+                with open ('/sys/firmware/devicetree/base/model','r') as model:
+                    if 'raspberry pi' in model.read().lower():
+                      return "Raspberry pi"
+        except:
+            pass
     else:
         return "Unknown"
         
