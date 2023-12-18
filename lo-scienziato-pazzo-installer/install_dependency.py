@@ -89,10 +89,12 @@ def get_platform():
                 with open ('/sys/firmware/devicetree/base/model','r') as model:
                     if 'raspberry pi' in model.read().lower():
                       return "Raspberry pi"
-        except Exception as f:
-            logger.info("Error:",f)
+        
     else:
         return "Unknown"
+            
+        except Exception as f:
+            logger.info("Error:",f)
         
 def success_installation(dp):
     logger.info("installed dependencies success")
