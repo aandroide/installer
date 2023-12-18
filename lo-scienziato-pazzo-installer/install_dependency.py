@@ -210,7 +210,7 @@ def run():
     elif get_platform()=="Kubuntu":
         install_dep_in_linux()
 
-    elif get_platform()=="Raspberry pi":
+    elif get_platform()=="Raspberry Pi":
         install_dep_in_linux()
         
     else:#--- if not linux --- 
