@@ -80,17 +80,14 @@ def get_platform():
     elif os.path.exists('/usr/share/plasma/desktoptheme/kubuntu'):
         if "Ubuntu" in os.uname()[3]:
           return "Kubuntu"
-    elif xbmc.getCondVisibility('system.platform.linux.Raspberrypi'):
-        return "Raspberry Pi"
+    #elif xbmc.getCondVisibility('system.platform.linux.Raspberrypi'):
+    #    return "Raspberry Pi"
     elif xbmc.getCondVisibility('system.platform.linux') and not xbmc.getCondVisibility('system.platform.android'):
         print("Detected OS: Linux")
         if "Ubuntu" in os.uname()[3]:
           return "Ubuntu"
-        #elif "arm" in platform.machine().lower():
-            #with open ('/sys/firmware/devicetree/base/model','r') as model:
-                    #if 'raspberry pi' in model.read().lower():
-                      #return "Raspberry pi"
-        
+        elif "arm" in os.uname()[4]:
+            return "Raspberry Pi"
     else:
         return "Unknown"
  
