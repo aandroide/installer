@@ -6,5 +6,10 @@ alt="Delete image" width="100" height="100" />
 
 # This addon is compatible with the following devices:
 <br>
-Un installer dello Scienziato-Pazzo, una volta installato si auto-avvia e scarica lo zip da github, mentre ti mostra la schermata di configurazione iniziale
+-1- Windows
+-2- Android
+-3- Raspberry solo con immagine Libreelec
+-4- Ubuntu
+-5- Kubuntu
+-6- Ios
 <br>
