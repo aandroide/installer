@@ -18,6 +18,6 @@ alt="Delete image" width="100" height="100" />
 <br>
 5. Kubuntu
 <br>
-6. Ios
+6. Ios.
 <br>
 
