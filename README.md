@@ -4,7 +4,7 @@
 alt="Delete image" width="100" height="100" />
 <b>lo-scienziato-pazzo-Installer</b>
 
-# This addon is compatible with the following devices:
+<p> This addon is compatible with the following devices:</p> 
 <br>
 -1- Windows
 <br>
