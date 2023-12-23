@@ -7,9 +7,15 @@ alt="Delete image" width="100" height="100" />
 # This addon is compatible with the following devices:
 <br>
 -1- Windows
+<br>
 -2- Android
+<br>
 -3- Raspberry solo con immagine Libreelec
+<br>
 -4- Ubuntu
+<br>
 -5- Kubuntu
+<br>
 -6- Ios
 <br>
+
