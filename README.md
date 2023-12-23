@@ -6,6 +6,7 @@ alt="Delete image" width="100" height="100" />
 <br>
 ## The purpose of this addon is to automate the installation of iptvclient on kodi based on the platform used.
 <br>
+<p>On Linux systems, the Sudo password will be requested in order to start the script which will automatically install the necessary dependencies.</p>
 <p> This addon is compatible with the following devices:</p> 
 1. Windows
 <br>
