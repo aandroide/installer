@@ -11,7 +11,7 @@ alt="Delete image" width="100" height="100" />
 <br>
 2. Android
 <br>
-3. Raspberry solo con immagine Libreelec
+3. Raspberry only with Libreelec image
 <br>
 4. Ubuntu
 <br>
