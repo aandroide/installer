@@ -71,10 +71,10 @@ def chooseBranch():
         logger.info(e)
         return False
     branches = json.loads(branches)
-    #chDesc = [config.get_localized_string(80034), config.get_localized_string(80035)]
-    #chDesc.extend([b['name'] for b in branches if b['name'] not in ['stable', 'master']])
-    #chName = ['stable', 'master']
-    #chName.extend([b['name'] for b in branches if b['name'] not in ['stable', 'master']])
+    chDesc = [config.get_localized_string(80034), config.get_localized_string(80035)]
+    chDesc.extend([b['name'] for b in branches if b['name'] not in ['stable', 'master']])
+    chName = ['stable', 'master']
+    chName.extend([b['name'] for b in branches if b['name'] not in ['stable', 'master']])
     sel = platformtools.dialog_select(config.get_localized_string(80033), chDesc)
     if sel == -1:
         return False
