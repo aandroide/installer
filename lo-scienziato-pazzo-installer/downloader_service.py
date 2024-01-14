@@ -71,7 +71,7 @@ def chooseBranch():
         logger.info(e)
         return False
     branches = json.loads(branches)
-    chDesc = [config.get_localized_string(80034), config.get_localized_string(80035)]
+    chDesc = [config.get_localized_string(80034)]
     chDesc.extend([b['name'] for b in branches if b['name'] not in ['stable']])
     chName = ['stable']
     chName.extend([b['name'] for b in branches if b['name'] not in ['stable']])
