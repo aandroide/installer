@@ -6265,8 +6265,8 @@ msgid "Choose the version of Lo Scienziato Pazzo to install"
 msgstr "Scegli la versione dello Scienziato Pazzo da installare"
 
 msgctxt "#80034"
-msgid "release (stable version)"
-msgstr "release (versione stabile)"
+msgid "Setup universal"
+msgstr "Setup universale"
 
 msgctxt "#80035"
 msgid "master (beta version under development)"
